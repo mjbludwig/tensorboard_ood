@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#
+# Load modules
+#
+
+# Load the Tensorflow module (required)
+module load <%= context.version %>
+
+<%- unless context.modules.blank? -%>
+# Load additional modules
+module load <%= context.modules %>
+<%- end -%>
+
+#
+# Start Tensorboard Server
+#
+
+# Set working directory to home directory
+cd "${HOME}"
+
+# Launch the Tensorboard Server
+# start on 127.0.0.1, since TensorBoard doesn't support any kind of authentication
+# and we rely on authrevproxy to only allow authentified requests
+tensorboard --logdir=<%= context.tb_logdir %> \
+            --host=127.0.0.1 \
+            --port="${app_port}"

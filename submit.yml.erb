@@ -1,0 +1,19 @@
+# Job submission configuration file
+#
+---
+
+batch_connect:
+  template: "basic"
+
+script:
+  native:
+    - "--time"
+    - "<%= bc_num_hours %>:0:0"
+    - "-n"
+    - "<%= num_cores %>"
+    - "--mem"
+    - "<%= num_memory %>"
+    - "--nodes"
+    - "1"
+    - "--reservation"
+    - "<%= reservation %>"

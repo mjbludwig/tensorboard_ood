@@ -1,0 +1,37 @@
+---
+
+cluster: "mycluster"
+
+attributes:
+
+
+<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/medium/num_cores.yml").indent(2) %>
+
+<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/large/num_memory.yml").indent(2) %>
+
+  tb_logdir:
+    label: "Tensorboard logdir"
+    required: true
+    help: "The directory that contains data to visualize."
+  version:
+    widget: select
+    label: "Jupyter, R, Python Version"
+    help: "This defines the version of Jupter you want to load."
+    options:
+      - [ "anaconda/2021.05", "anaconda/2021.05" ]
+
+  modules:
+    widget: text_field
+    label: "Load Supporting Modules"
+    help: "ENTER module name ONLY.\n e.g. for \"module load java/1.8.0_60 gcc/7.3.0\" in command line, ENTER \"java/1.8.0_60 gcc/7.3.0\""
+
+<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/reservation.yml").indent(2) %>
+
+form:
+  - tb_logdir
+  - bc_num_hours
+  - num_cores
+  - num_memory
+  - version
+  - reservation
+  - modules
